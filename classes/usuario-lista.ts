@@ -19,7 +19,9 @@ export class USuarioLista {
         }
     }
     public getLista() {
-        return this.lista;
+        return this.lista.filter(usuario=>{
+            return  usuario.nombre !== '';
+        });
     }
 
     public getUsuario(id: string) {
