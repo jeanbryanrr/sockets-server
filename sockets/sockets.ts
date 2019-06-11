@@ -2,6 +2,7 @@ import { Socket } from 'socket.io';
 import socketIO from 'socket.io';
 import { USuarioLista } from '../classes/usuario-lista';
 import { Usuario } from '../classes/usuario';
+import { mapa } from '../routes/router'
 
 
 
@@ -42,5 +43,12 @@ export const conectarCliente = (cliente: Socket, io: socketIO.Server) => {
 export const obtenerUsuario = (cliente: Socket, io: socketIO.Server) => {
     cliente.on('obtener-usuario', () => {
         io.to(cliente.id).emit('usuarios-activos', usuariosConectados.getLista());
+    });
+};
+
+export const nuevoMarcador = (cliente: Socket, io: socketIO.Server) => {
+    cliente.on('marcador-nuevo', (marcador) => {
+        mapa.agregarMarcador(marcador);
+        cliente.broadcast.emit('marcador-nuevo', marcador);
     });
 };

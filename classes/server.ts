@@ -23,16 +23,16 @@ export default class Server {
     private escucharSockets() {
         this.io.on('connection', cliente => {
             // conectar nuevo cliente
-            socket.conectarCliente(cliente, this.io);
-
-            // configurar usuario
-            socket.config(cliente, this.io);
-            //obtenr usuarios activos
-            socket.obtenerUsuario(cliente, this.io);
-
-            socket.mensaje(cliente, this.io);
-            socket.desconectar(cliente, this.io);
-
+            /*         socket.conectarCliente(cliente, this.io);
+        
+                    // configurar usuario
+                    socket.config(cliente, this.io);
+                    //obtenr usuarios activos
+                    socket.obtenerUsuario(cliente, this.io);
+        
+                    socket.mensaje(cliente, this.io);
+                    socket.desconectar(cliente, this.io); */
+            socket.nuevoMarcador(cliente, this.io);
         });
 
 
