@@ -15,7 +15,6 @@ export const desconectar = ((cliente: Socket, io: socketIO.Server) => {
 
 export const mensaje = (cliente: Socket, io: socketIO.Server) => {
     cliente.on('mensaje', (payload: { de: string, cuerpo: string }) => {
-        console.log(`mensaje recibido `, payload);
         io.emit('mensaje-nuevo', payload);
     });
 };
@@ -38,6 +37,10 @@ export const usuariosConectados = new USuarioLista();
 export const conectarCliente = (cliente: Socket, io: socketIO.Server) => {
     const usuario = new Usuario(cliente.id);
     usuariosConectados.agregar(usuario);
- 
-
 }
+
+export const obtenerUsuario = (cliente: Socket, io: socketIO.Server) => {
+    cliente.on('obtener-usuario', () => {
+        io.to(cliente.id).emit('usuarios-activos', usuariosConectados.getLista());
+    });
+};

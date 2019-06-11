@@ -22,12 +22,14 @@ export default class Server {
 
     private escucharSockets() {
         this.io.on('connection', cliente => {
-            // conectar cliente
+            // conectar nuevo cliente
             socket.conectarCliente(cliente, this.io);
 
             // configurar usuario
             socket.config(cliente, this.io);
-            console.log(cliente.id);
+            //obtenr usuarios activos
+            socket.obtenerUsuario(cliente, this.io);
+
             socket.mensaje(cliente, this.io);
             socket.desconectar(cliente, this.io);
 
